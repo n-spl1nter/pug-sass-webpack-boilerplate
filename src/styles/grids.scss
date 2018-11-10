@@ -1,0 +1,61 @@
+@mixin makeRow($gutter: $grid-gutter-xs) {
+  margin-left: -($gutter / 2);
+  margin-right: -($gutter / 2);
+}
+
+@mixin makeColumnGutter($gutter: $grid-gutter-xs) {
+  padding: 0 ($gutter / 2);
+}
+
+@mixin makeColumnsOffset($columnsCount, $columnSuffix, $gridBreakpoint, $i: 0) {
+  .col-#{$columnSuffix}-offset-#{$i} {
+    @media (min-width: $gridBreakpoint) {
+      margin-left: ($i / $columnsCount * 100%);
+    }
+  }
+}
+
+@mixin makeColumns($columnsCount, $columnSuffix, $gridBreakpoint, $gridGutter: $grid-gutter-xs) {
+  @for $i from 1 through $columnsCount {
+    .col-#{$columnSuffix}-#{$i} {
+      @media (min-width: $gridBreakpoint) {
+        width: ($i / $columnsCount * 100%);
+      }
+    }
+    @include makeColumnsOffset($columnsCount, $columnSuffix, $gridBreakpoint, ($i - 1));
+  }
+
+  [class*="col-"] {
+    @media (min-width: $gridBreakpoint) {
+      @include makeColumnGutter($gridGutter);
+    }
+  }
+
+}
+
+@include makeColumns($grid-columns-count-xs, 'xs', $grid-breakpoint-xs, $grid-gutter-xs);
+@include makeColumns($grid-columns-count-sm, 'sm', $grid-breakpoint-sm, $grid-gutter-xs);
+@include makeColumns($grid-columns-count-md, 'md', $grid-breakpoint-md, $grid-gutter-md);
+@include makeColumns($grid-columns-count-lg, 'lg', $grid-breakpoint-lg, $grid-gutter-lg);
+@include makeColumns($grid-columns-count-xl, 'xl', $grid-breakpoint-xl, $grid-gutter-lg);
+
+.container{
+  margin: 0 auto;
+  max-width: $containerWidth;
+  padding: 0 ($grid-gutter-lg / 2);
+}
+
+.row{
+  display: flex;
+  flex-wrap: wrap;
+
+  @include makeRow($grid-gutter-xs);
+
+  @media (min-width: $grid-breakpoint-md){
+    @include makeRow($grid-gutter-md);
+  }
+  @media (min-width: $grid-breakpoint-lg){
+    @include makeRow($grid-gutter-lg);
+  }
+
+}

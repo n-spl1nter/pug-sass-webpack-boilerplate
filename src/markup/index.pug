@@ -1,0 +1,15 @@
+extends ./layouts/main
+
+block variables
+  - var title = 'Main page'
+  - var isMainPage = true
+
+block content
+  .container
+    .row
+      .col-xs-4.col-xl-8
+        h1 Main page
+      .col-xs-2
+        img(src=require("../assets/img/logo.png"))
+      .col-xs-2.col-xl-12.col-lg-6.col-lg-offset-2.col-xl-offset-0
+        p(style="background-color: blueviolet") Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, odio.

@@ -1,0 +1,28 @@
+/*
+  Grid layout
+  size            suffix            columns     gutter-width
+  ++++++|+++++++++++++++++++++++++|++++++++++|+++++++++++++++
+  >=1600 - xl(default columns)     === x12         32px
+  >=1280 - lg(desktop small)       === x8          32px
+  >=768  - md(tablets)             === x6          24px
+  >=480  - sm(phones)              === x4          16px
+  >=0    - xs(small phones)        === x4          16px
+*/
+
+$grid-breakpoint-xs: 0px;
+$grid-breakpoint-sm: 480px;
+$grid-breakpoint-md: 768px;
+$grid-breakpoint-lg: 1025px;
+$grid-breakpoint-xl: 1600px;
+
+$grid-gutter-xs: 10px;
+$grid-gutter-md: 20px;
+$grid-gutter-lg: 30px;
+
+$grid-columns-count-xs: 4;
+$grid-columns-count-sm: 4;
+$grid-columns-count-md: 6;
+$grid-columns-count-lg: 8;
+$grid-columns-count-xl: 12;
+
+$containerWidth: 1280px;

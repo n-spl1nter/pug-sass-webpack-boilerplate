@@ -1,0 +1,15 @@
+{
+  "presets": [
+    ["@babel/env", { "targets": "> 0.25%, not dead" }]
+  ],
+  "plugins": [
+    "@babel/plugin-transform-classes"
+  ],
+  "env": {
+    "production": {
+      "plugins": [
+        ["@babel/transform-runtime", { "helpers": true, "regenerator": true }]
+      ]
+    }
+  }
+}
