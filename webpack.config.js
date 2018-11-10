@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 const srcPath = './src/';
@@ -135,7 +136,6 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: NODE_ENV === 'development' ? 'css/[name].css?[hash]' : 'css/[name].min.css?[hash]'
     }),
-    new webpack.NoEmitOnErrorsPlugin(),
     new BrowserSyncPlugin({
       host: 'localhost',
       port: 3000,
@@ -147,14 +147,23 @@ module.exports = {
 
 if (NODE_ENV === 'production') {
   module.exports.plugins.push(
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings:     false,
-        drop_console: true,
-        unsafe:       true
-      }
-    }),
     new webpack.NoEmitOnErrorsPlugin()
   );
+  module.exports.optimization = {
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+        uglifyOptions: {
+          compress: {
+            warnings:     false,
+            drop_console: true,
+            unsafe:       true
+          },
+          mangle: true
+        },
+      })
+    ]
+  }
 }
 
